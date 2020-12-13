@@ -3,16 +3,24 @@
 @section('content')
 
 <div clas ="container">
+    @if (session('status'))
+    <div class="alert alert-info">
+        {{ session('status')}}
 
+    </div>
+    @endif
+<div>
     <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Roles</th>
-            </tr>
-        </thead>
-
+    
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                </tr>
+            </thead>
+    
+    
         @foreach ($model as $user)
             <tr>
                 <td>
@@ -31,7 +39,7 @@
 
 
     </table>
-
+    {{ $model->links() }}
 </div>
 
 
