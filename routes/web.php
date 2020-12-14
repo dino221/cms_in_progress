@@ -26,6 +26,10 @@ Route::resource('/admin/pages', 'Admin\PagesController', ['except' => [
     'show'
 ]]); //->middleware('admin');
 
+Route::resource('/admin/blog', 'Admin\BlogController', ['except' => [
+    'show'
+]]);
+
 
 Route::resource('/admin/users', 'Admin\UsersController', ['except' => [
     'create', 'store', 'show'

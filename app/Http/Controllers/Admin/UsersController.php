@@ -23,7 +23,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index')->with('model', User::paginate(20));
+        return view('admin.users.index')->with('model', User::paginate(1));
     }
 
     /**

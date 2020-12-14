@@ -11,24 +11,27 @@
     </div>
     @endif
     <br />
-    <a href="{{ route('pages.create')}}" class="btn btn-default">Create New</a>
+    <a href="{{ route('blog.create')}}" class="btn btn-default">Create New</a>
 
 
     <table class="table">
         <thead>
             <tr>
                 <th>Title</th>
-                <th>URL</th>
+                <th>Author</th>
+                <th>Slug</th>
+                <th>Published</th>
 
             </tr>
         </thead>
 
-        @foreach ($pages as $page)
+        @foreach ($model as $post)
             <tr>
                 <td>
-                <a href="{{ route('pages.edit', ['page' => $page->id])}}">{{ $page->title }}</a>
+                <a href="{{ route('blog.edit', ['blog' => $post->id])}}">{{ $post->title }}</a>
                 </td>
-                <td>{{ $page->url }}</td>
+                <td>{{ $post->user()->first()->name }}</td>
+                <td>{{ $post->slug }}</td>
                 <td></td>
 
             </tr>
@@ -38,7 +41,7 @@
 
     </table>
 
-    {{ $pages->links() }}
+    {{ $model->links() }}
 </div>
 
 

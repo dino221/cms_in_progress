@@ -4,17 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Page extends Model
+class Post extends Model
 {
-    
     //
     protected $fillable = [
         'title',
-        'url',
-        'content'
+        'slug',
+        'body',
+        'excerpt'
     ];
-
 
 
     public function user() {
