@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div clas ="container">
 
 @if (session('status'))
@@ -21,6 +22,7 @@
                 <th>Author</th>
                 <th>Slug</th>
                 <th>Published</th>
+                <th></th>
 
             </tr>
         </thead>
@@ -33,6 +35,19 @@
                 <td>{{ $post->user()->first()->name }}</td>
                 <td>{{ $post->slug }}</td>
                 <td></td>
+                <td>
+                
+                <a href="{{ route('blog.destroy', ['blog' => $post->id]) }}" class="btn btn-danger delete-link"
+                    data-message="Are you sure you want to delete this post?"
+                    data-form="delete-form">
+                        Delete
+                </a>
+                
+                
+                
+                
+                
+                </td>
 
             </tr>
 
@@ -43,6 +58,10 @@
 
     {{ $model->links() }}
 </div>
+<form id="delete-form" action="" method="post">
+    {{ method_field('PUT') }}
+    {!! csrf_field() !!}
+</form>
 
 
 

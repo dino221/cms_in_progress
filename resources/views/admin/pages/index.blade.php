@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div clas ="container">
 
 @if (session('status'))
@@ -29,7 +30,13 @@
                 <a href="{{ route('pages.edit', ['page' => $page->id])}}">{{ $page->title }}</a>
                 </td>
                 <td>{{ $page->url }}</td>
-                <td></td>
+                <td class="text-right">
+
+                <a href="{{ route('pages.destroy', ['page' => $page->id]) }}" class="btn btn-danger delete-link"
+                    data-message="Are you sure you want to delete this post"
+                    data-form="delete-form">
+                        Delete
+                </a>
 
             </tr>
 
@@ -40,6 +47,11 @@
 
     {{ $pages->links() }}
 </div>
+
+<form id="delete-form" action="" method="POST">
+    {{ method_field('DELETE') }}
+    {!! csrf_field() !!}
+</form>
 
 
 

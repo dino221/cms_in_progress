@@ -8,6 +8,8 @@ use Auth;
 use App\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
 
 class BlogController extends Controller
 {
@@ -37,7 +39,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.blog.create')->with('model', new Post());
     }
 
     /**
@@ -46,9 +48,14 @@ class BlogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
-        //
+        Auth::user()->posts()->save(
+            new Post($request->only(['title', 'slug',
+             'published_at', 'excerpt', 'body']))
+        );
+
+        return redirect()->route('blog.index')->with('status', 'The post was created');
     }
 
     /**
@@ -68,9 +75,9 @@ class BlogController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Post $blog)
     {
-        //
+        return view('admin.blog.edit')->with('model',$blog);
     }
 
     /**
@@ -80,9 +87,15 @@ class BlogController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(UpdateBlogRequest $request, Post $blog)
     {
-        //
+        if (Auth::user()->cant('update', $blog)) {
+            return redirect()->route('blog.index')->with('status', 'You do not have permission to edit that post.');
+        }
+        $blog->fill($request->only(['title', 'slug',
+         'published_at', 'excerpt', 'body']))->save();;
+
+        return redirect()->route('blog.index')->with('status', 'The post was updated.');
     }
 
     /**
@@ -91,8 +104,14 @@ class BlogController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Post $blog)
     {
-        //
+        if (Auth::user()->cant('update', $blog)) {
+            return redirect()->route('blog.index')->with('status', 'You do not have permission to delete that post.');
+        }
+        $blog->delete();
+        return redirect()->route('blog.index')->with('status', 'The post was deleted.');
+
+
     }
 }
