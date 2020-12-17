@@ -2,6 +2,9 @@
 
 @section('content')
 
+@csrf
+@method('POST')
+
 
 <div clas ="container">
 
@@ -59,8 +62,8 @@
     {{ $model->links() }}
 </div>
 <form id="delete-form" action="" method="post">
-    {{ method_field('PUT') }}
-    {!! csrf_field() !!}
+@method("POST")
+    
 </form>
 
 

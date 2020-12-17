@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@csrf
+@method('POST')
 @section('content')
 
 <div class="container">

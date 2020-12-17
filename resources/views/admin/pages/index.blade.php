@@ -48,9 +48,9 @@
     {{ $pages->links() }}
 </div>
 
-<form id="delete-form" action="" method="POST">
+<form id="delete-form" action="" method=post>
     {{ method_field('DELETE') }}
-    {!! csrf_field() !!}
+    { csrf_field() }
 </form>
 
 
