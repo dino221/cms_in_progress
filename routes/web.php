@@ -29,6 +29,7 @@ Route::resource('/admin/pages', 'Admin\PagesController', ['except' => [
 Route::resource('/admin/blog', 'Admin\BlogController', ['except' => [
     'show'
 ]]);
+//Route::resource('/admin/blog', 'Blog\Controller@index');
 
 
 Route::resource('/admin/users', 'Admin\UsersController', ['except' => [
@@ -37,3 +38,4 @@ Route::resource('/admin/users', 'Admin\UsersController', ['except' => [
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
