@@ -62,7 +62,7 @@
     {{ $model->links() }}
 </div>
 <form id="delete-form" action="" method="post">
-@method("POST")
+@method("PATCH")
     
 </form>
 
